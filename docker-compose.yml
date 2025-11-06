@@ -1,0 +1,19 @@
+﻿version: '3.8'
+
+services:
+  etl:
+    build: .
+    container_name: alvorada-etl
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./reports:/app/reports
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          memory: 512M
