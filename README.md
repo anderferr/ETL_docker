@@ -198,8 +198,10 @@ curl http://localhost:5000/health
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/health` | GET | Health check endpoint |
-| `/trigger` | POST | Manual ETL trigger for test images |
+| `/` | GET | Home page with navigation links |
+| `/health` | GET | Health check with system status |
+| `/trigger` | GET | Trigger page with button |
+| `/trigger` | POST | Executes ETL for all .jpg files in S3 bucket |
 
 ## Project Structure
 

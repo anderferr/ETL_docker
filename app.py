@@ -139,8 +139,23 @@ def trigger():
     """Manual ETL trigger endpoint"""
     if request.method == 'POST':
         try:
-            run_etl(['000', '001'])
-            message = "Success! ETL completed."
+            # List all .jpg files from S3 bucket
+            s3 = boto3.client('s3')
+            bucket = os.getenv('S3_BUCKET', 'alvorada-bucket')
+            response = s3.list_objects_v2(Bucket=bucket)
+            
+            images = []
+            if 'Contents' in response:
+                for obj in response['Contents']:
+                    key = obj['Key']
+                    if key.endswith('.jpg'):
+                        images.append(key.replace('.jpg', ''))
+            
+            if images:
+                run_etl(images)
+                message = f"Success! ETL completed. Processed {len(images)} images."
+            else:
+                message = "No .jpg files found in S3 bucket."
         except Exception as e:
             message = f"Error: {str(e)}"
         

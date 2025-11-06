@@ -22,7 +22,7 @@ class Extract:
                             - name: company name, contractor, client, or supplier name
                             - description: main product or service description
                             - line_items: array of products/services with:
-                            * item: product/service name or description (NOT codes or numbers)
+                            * item: identify main product/service name and, if not found, use a short description (but NOT codes or numbers)
                             * quantity: number of units
                             * unit_price: price per unit
                             * total: total amount for this line
@@ -31,6 +31,8 @@ class Extract:
                             - For 'item', extract the PRODUCT NAME or SERVICE DESCRIPTION, ignore item codes/SKU numbers
                             
                             - Ignore numeric codes unless they are the only identifier
+                            
+                            IMPORTANT: Always remember that you are extracting from invoices and receipts and sometimes the information may be confusing or missing
 
                             Return only valid JSON, no additional text."""}
                     ]
